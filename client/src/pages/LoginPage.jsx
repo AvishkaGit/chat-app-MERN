@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import assets from '../assets/assets'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
 
 const LoginPage = () => {
 
@@ -10,13 +12,17 @@ const LoginPage = () => {
   const [bio, setBio] = useState("")
   const [isDataSubmitted, setIsDataSubmitted] = useState(false);
 
-  const onSubmitHandler = (event) =>{
-        event.preventDefault();
+  const { login } = useContext(AuthContext)
 
-        if(currState === 'Sign up' && !isDataSubmitted){
-          setIsDataSubmitted(true)
-          return;
-        }
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+
+    if (currState === 'Sign up' && !isDataSubmitted) {
+      setIsDataSubmitted(true)
+      return;
+    }
+
+    login(currState === "Sign up" ? 'signup' : 'login', { fullName, email, password, bio })
   }
 
 
@@ -30,7 +36,7 @@ const LoginPage = () => {
       <form onSubmit={onSubmitHandler} className='border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg'>
         <h2 className='font-medium text-2xl flex justify-between items-center'>
           {currState}
-          {isDataSubmitted && <img onClick={()=> setIsDataSubmitted(false)} src={assets.arrow_icon} alt="" className='w-5 cursor-pointer' />}
+          {isDataSubmitted && <img onClick={() => setIsDataSubmitted(false)} src={assets.arrow_icon} alt="" className='w-5 cursor-pointer' />}
 
         </h2>
 
