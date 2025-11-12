@@ -8,7 +8,7 @@ export const ChatContext = createContext()
 
 export const ChatProvider = ({ children }) => {
 
-    const [messages, setMessages] = useState();
+    const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [unseenMessages, setUnseenMessages] = useState({})
@@ -83,7 +83,7 @@ export const ChatProvider = ({ children }) => {
 
 
     const value = {
-        messages, users, selectedUser, getUsers, setMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
+        messages, users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
     }
 
     return (
